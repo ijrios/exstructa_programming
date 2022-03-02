@@ -1,10 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Feb 11 15:22:07 2022
+Created on Mon Feb 28 10:50:52 2022
 
 @author: jario
 """
 
+'''
+Cree una lista de 100 elementos con numeros aleatorios
+para la lista crear un metodo buscar elemento que indique
+si un numero se encuentra o no dentro de la lista
+'''
+
+import random
 
 class Nodo:
     
@@ -13,7 +20,7 @@ class Nodo:
         self.valor = valor
         self.siguiente =sig
         
-class ControlLista:
+class Lista:
     #Condicion inicial de la lista vacía
     def __init__(self,cabeza=None,cola=None): 
         self.cabeza = cabeza
@@ -26,18 +33,26 @@ class ControlLista:
             self.cabeza = Nodo(valor)
             self.cola = self.cabeza
         else:
-            # Se le añade un elemnto a la lista
+            # Se le añade un elemento a la lista
             n = Nodo(valor)
             self.cola.siguiente = n
-            self.cola = n 
-        
-  
+            self.cola = n
+ 
+   
+    def buscar(self,elemento):
+       n = self.cabeza
+       while(n != None):
+           if(n.valor == elemento):
+               return True
+           n = n.siguiente
+       return False
+
 def main():
     
-    lista_simple = ControlLista()
+    lista_simple = Lista()
     #Llenar la lista
-    for i in range(100,110):
-        lista_simple.ad_valor(i)
+    for i in range(1,101):
+        lista_simple.ad_valor(i*random.randint(0,10))
         
     #Recorrer la lista
     n = lista_simple.cabeza
@@ -45,17 +60,6 @@ def main():
         print(n.valor)
         n = n.siguiente
         
-
-def main2():
-    n1 = Nodo(4)
-    n2 = Nodo(5)
-    n3 = Nodo(-5)
-    n1.siguiente = n2
-    n2.siguiente = n3
-    
-    n = n1
-    while(n != None):
-        print(n.valor)
-        n = n.siguiente
-
+    print(lista_simple.buscar(40))
+        
 main()
