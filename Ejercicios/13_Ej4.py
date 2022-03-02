@@ -39,6 +39,8 @@ def main():
          
     for i in range(100):
         numb = random.randint(0,10)
+        #Cuando tengo caos (incertidumbre) en el ingreso
+        #El algoritmo tiende hacer todas las repeticiones
         find = buscar(lista,numb)
         lista_contador.append(find)
     
@@ -49,5 +51,6 @@ def main():
     plt.hist(lista_contador)
     plt.show
          
+
         
 main()
