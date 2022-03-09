@@ -78,8 +78,8 @@ def main():
                     except ValueError:
                         print("Oops!  formato invalido debe ser entero. prueba de nuevo...")
               
-            person = Persona(nombre,cedula,edad)
-            list.append(person)
+                person = Persona(nombre,cedula,edad)
+                list.append(person)
            
         elif opc == "2": 
             #lista completa
