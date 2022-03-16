@@ -98,7 +98,7 @@ class Lista:
             resultado = ultimo
 		
 		#Este bucle detecta un elemento dado mediante la búsqueda binaria.
-        while (resultado == None and medio != None and primero != ultimo) :
+        while (resultado == None and primero != ultimo) :
 			#Primero encuentra el elemento medio
             medio = self.valorMedio(primero, ultimo)
             if (medio == None) :
