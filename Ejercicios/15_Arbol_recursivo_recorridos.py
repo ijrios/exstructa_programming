@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Feb 23 10:33:42 2022
+Created on Wed Mar 16 11:40:05 2022
 
 @author: jario
 """
@@ -47,7 +47,35 @@ class Arbol_simple:
             else:
                 anterior.derecho = n
                 
-    
+    def preOrden(self):
+        self.preOrden_recur(self.raiz)
+        
+    def preOrden_recur(self,nodo):
+        print(nodo.valor)
+        if(nodo.izquierdo != None):
+            self.preOrden_recur(nodo.izquierdo)
+        if(nodo.derecho != None):
+            self.preOrden_recur(nodo.derecho)
+                
+    def inOrden(self):
+        self.inOrden_recur(self.raiz)
+        
+    def inOrden_recur(self,nodo):
+        if(nodo.izquierdo != None):
+            self.inOrden_recur(nodo.izquierdo)
+            print(nodo.valor)
+        if(nodo.derecho != None):
+            self.inOrden_recur(nodo.derecho)
+        
+    def posOrden(self):
+        self.posOrden_recur(self.raiz)
+        
+    def posOrden_recur(self,nodo):
+        if(nodo.izquierdo != None):
+            self.posOrden_recur(nodo.izquierdo)
+        if(nodo.derecho != None):
+            self.posOrden_recur(nodo.derecho)
+            print(nodo.valor)
        
 
     
@@ -59,9 +87,5 @@ arbol.add_nodo("D")
 arbol.add_nodo("E")
 arbol.add_nodo("F")
 arbol.add_nodo("G")
+arbol.preOrden()
     
-
-
-                
-         
-        
