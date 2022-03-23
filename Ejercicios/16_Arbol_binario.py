@@ -1,23 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Mar 16 11:40:05 2022
+Created on Wed Mar 23 10:17:58 2022
 
 @author: jario
 """
 
-#Los arboles son estructuras de datos
-#que disponen sus elementos según
-#el concepto de árbol en la naturaleza, 
-#se puede intuir que se trata de una estructura jerarquica
-#Cuando el alrbol es recargado a la izquierda, queda con una complejidad de n
-
-#Orden: numero de hijos
-#Altura: Cantidad de niveles 
+#Arboles Binarios
 
 class Nodo:
     
     def __init__(self, valor):
-        self.valor = valor
+        self.val = valor
         self.izquierdo = None
         self.derecho = None
         
@@ -43,16 +36,45 @@ class Arbol_simple:
                 else:
                     nodocontrol = nodocontrol.izquierdo
                 
+            #nodo control ---->  None
             if(anterior.izquierdo == None):
                 anterior.izquierdo = n
             else:
                 anterior.derecho = n
                 
+            
+    #Se añade valor   
+    def add_binario(self,valor):
+        n = Nodo(valor)
+        if(self.raiz == None):
+            self.raiz = n
+        else:
+            #Arbol semibalanceado binario
+            nodocontrol = self.raiz
+            anterior = None
+            while(nodocontrol != None):
+                anterior = nodocontrol
+                if(n.val < nodocontrol.val):
+                    nodocontrol = nodocontrol.izquierdo
+                elif(n.val > nodocontrol.val):
+                    nodocontrol = nodocontrol.derecho
+                elif(n.val == nodocontrol.val):
+                    print("Valor " + str(n.val) + " ya ingresado")
+                    # Puede ser --- nodocontrol = None
+                    break
+                    
+            #nodo control ---->   < o >    
+            if(n.val < anterior.val):
+                anterior.izquierdo = n
+            elif(n.val > anterior.val):
+                anterior.derecho = n
+                
+                     
     def preOrden(self):
         self.preOrden_recur(self.raiz)
         
     def preOrden_recur(self,nodo):
-        print(nodo.valor)
+        print(nodo.val)
         if(nodo.izquierdo != None):
             self.preOrden_recur(nodo.izquierdo)
         if(nodo.derecho != None):
@@ -64,7 +86,7 @@ class Arbol_simple:
     def inOrden_recur(self,nodo):
         if(nodo.izquierdo != None):
             self.inOrden_recur(nodo.izquierdo)
-            print(nodo.valor)
+        print(nodo.val)
         if(nodo.derecho != None):
             self.inOrden_recur(nodo.derecho)
         
@@ -76,17 +98,17 @@ class Arbol_simple:
             self.posOrden_recur(nodo.izquierdo)
         if(nodo.derecho != None):
             self.posOrden_recur(nodo.derecho)
-            print(nodo.valor)
-       
-
-    
+        print(nodo.val)
+        
+  
+   
 arbol = Arbol_simple()
-arbol.add_nodo("A")
-arbol.add_nodo("B")
-arbol.add_nodo("C")
-arbol.add_nodo("D")
-arbol.add_nodo("E")
-arbol.add_nodo("F")
-arbol.add_nodo("G")
+arbol.add_binario(10)
+arbol.add_binario(8)
+arbol.add_binario(7)
+arbol.add_binario(20)
+arbol.add_binario(22)
+arbol.add_binario(5)
+arbol.add_binario(4)
 arbol.preOrden()
     
