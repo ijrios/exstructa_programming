@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plot
-import random 
+import random
+import time
+import math
 
 class Nodo:
     #en la clase nodo se encuentra el valor del nodo y el siguiente que es donde
@@ -51,7 +53,6 @@ class ListaSimple:
                 nodo = nodo.siguiente
                 contador += 1
         return contador
-                
             
 def main():
     LisSim = ListaSimple()
@@ -59,15 +60,35 @@ def main():
     random.seed(10)
     NumeroDeIteraciones = []
     
+    inicial = time.time_ns()
     for i in range(1000):
         LisSim.add(random.randint(1, 1000))
-
-    for i in range(10):
+    print('Tiempo generando la lista ms',str((time.time_ns()-inicial)/1000000))
+    
+    TiempoEjecuciones = []
+    for i in range(500):
+        inicial = time.time_ns()
         NumeroDeIteraciones.append(LisSim.busqueda(random.randint(1, 1000)))
-
-    print(NumeroDeIteraciones)
+        final = time.time_ns()
+        TiempoEjecuciones.append(final-inicial)
+    
     plot.hist(NumeroDeIteraciones)
+    plot.title("Numero de Iteraciones")
+    plot.ylabel("Frecuencia")
+    plot.xlabel("Numero de comparaciones")
+    plot.grid()
     plot.show()
-
-
+    plot.bar(list(range(1,len(TiempoEjecuciones)+1)),TiempoEjecuciones)
+    plot.title("Tiempo de ejecucion busqueda de cada elemento")
+    plot.ylabel('Tiempo de ejecucion ns')
+    plot.xlabel('# de ejecución')
+    plot.grid()
+    plot.show()
+    print('Tiempo medio de ejecución ns:',(sum(TiempoEjecuciones))/len(TiempoEjecuciones))
+    mean = sum(TiempoEjecuciones) / len(TiempoEjecuciones)
+    var = sum((l-mean)**2 for l in TiempoEjecuciones) / len(TiempoEjecuciones)
+    st_dev = math.sqrt(var)
+    print('Desviación estandar ns', str(st_dev))
+    print('Max tiempo de ejecución ns', max(TiempoEjecuciones))
+    
 main()

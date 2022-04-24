@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plot
-import random
+import random, time, math
 
 #crear un arbol binario de busqueda
 def insertar(arbol, dato):
@@ -52,20 +52,40 @@ def buscar(arbol, dato, contador):
 
 arbol = None
 random.seed(28)
+inicial = time.time_ns()
 
 for i in range(1000):
     arbol = insertar(arbol,random.randint(1, 1000))
+print('Tiempo generando la lista ms',str((time.time_ns()-inicial)/1000000))
 
 NumerosBuscar = []
 NumeroDeIteraciones = []
 
-for i in range(10):
+TiempoEjecuciones = []
+for i in range(500):
+    inicial = time.time_ns()
     contador = 0
     Num = random.randint(1, 1000)
     NumerosBuscar.append(Num)
     NumeroDeIteraciones.append(buscar(arbol,Num,contador))
+    final = time.time_ns()
+    TiempoEjecuciones.append(final-inicial)
 
-print(NumerosBuscar)
-print(NumeroDeIteraciones)
 plot.hist(NumeroDeIteraciones)
+plot.title("Numero de Iteraciones")
+plot.ylabel("Frecuencia")
+plot.xlabel("Numero de comparaciones")
+plot.grid()
 plot.show()
+plot.bar(list(range(1,len(TiempoEjecuciones)+1)),TiempoEjecuciones)
+plot.title("Tiempo de ejecucion busqueda de cada elemento")
+plot.ylabel('Tiempo de ejecucion ns')
+plot.xlabel('# de ejecución')
+plot.grid()
+plot.show()
+print('Tiempo medio de ejecución ns:',(sum(TiempoEjecuciones))/len(TiempoEjecuciones))
+mean = sum(TiempoEjecuciones) / len(TiempoEjecuciones)
+var = sum((l-mean)**2 for l in TiempoEjecuciones) / len(TiempoEjecuciones)
+st_dev = math.sqrt(var)
+print('Desviación estandar ns', str(st_dev))
+print('Max tiempo de ejecución ns', max(TiempoEjecuciones))
