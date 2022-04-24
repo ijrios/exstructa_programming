@@ -117,42 +117,34 @@ class AVL_Tree(object):
 		self.preOrder(root.left)
 		self.preOrder(root.right)
 
-	def bfs(self, root, valor):
-		contador = 0
-		if root is None:
-			contador += 1
-			return contador 
-		queue = [root]
-		
-		encontrado = False
-		while len(queue) > 0 and not encontrado:
-			cur_node = queue.pop(0)
-			
-			if cur_node.val == valor:
-				encontrado = True
-				contador += 1
-				return contador
-			
-			else:
-				if cur_node.left is not None:
-					contador += 1
-					queue.append(cur_node.left)
-			
-				if cur_node.right is not None:
-					contador += 1
-					queue.append(cur_node.right)
-				
+def buscar(root, dato, contador):
+	if root == None:
+		contador += 1
 		return contador
+	
+	else:
+		
+		if root.val == dato:
+			contador += 1
+			return contador
+		else: 
+			if dato < root.val:
+				contador += 1
+				return buscar(root.left, dato, contador)
+			else:
+				contador += 1
+				return buscar(root.right, dato, contador)
+
 
 def main():
     # Driver program to test above function
-    
+    inicial = time.time_ns()
     myTree = AVL_Tree()
     random.seed(28)
     root = None
-    inicial = time.time_ns()
+    
     for i in range(1000):
-        root = myTree.insert(root, random.randint(1, 10000))
+        root = myTree.insert(root, random.randint(1, 1000))
     print('Tiempo generando la lista ms',str((time.time_ns()-inicial)/1000000))
     
     NumerosBuscar = []
@@ -160,12 +152,13 @@ def main():
     TiempoEjecuciones = []
     for i in range(500):
         inicial = time.time_ns()
-        Num = random.randint(1, 10000)
+        contador = 0
+        Num = random.randint(1, 1000)
         NumerosBuscar.append(Num)
-        NumeroDeIteraciones.append(myTree.bfs(root,Num))
+        NumeroDeIteraciones.append(buscar(root,Num,contador))
         final = time.time_ns()
         TiempoEjecuciones.append(final-inicial)
-
+  
     plot.hist(NumeroDeIteraciones)
     plot.title("Numero de Iteraciones")
     plot.ylabel("Frecuencia")
@@ -178,11 +171,11 @@ def main():
     plot.xlabel('# de ejecución')
     plot.grid()
     plot.show()
-    print('Tiempo medio de ejecución ns:',(sum(TiempoEjecuciones))/len(TiempoEjecuciones))
+    print('Tiempo medio de ejecución ns: ',(sum(TiempoEjecuciones))/len(TiempoEjecuciones))
     mean = sum(TiempoEjecuciones) / len(TiempoEjecuciones)
     var = sum((l-mean)**2 for l in TiempoEjecuciones) / len(TiempoEjecuciones)
     st_dev = math.sqrt(var)
-    print('Desviación estandar ns', str(st_dev))
-    print('Max tiempo de ejecución ns', max(TiempoEjecuciones))
+    print('Desviación estandar ns: ', str(st_dev))
+    print('Max tiempo de ejecución ns: ', max(TiempoEjecuciones))
 
 main()

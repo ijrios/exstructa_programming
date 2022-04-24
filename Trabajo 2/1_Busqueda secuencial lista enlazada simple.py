@@ -57,7 +57,7 @@ class ListaSimple:
 def main():
     LisSim = ListaSimple()
     
-    random.seed(10)
+    random.seed(28)
     NumeroDeIteraciones = []
     
     inicial = time.time_ns()
@@ -84,11 +84,11 @@ def main():
     plot.xlabel('# de ejecución')
     plot.grid()
     plot.show()
-    print('Tiempo medio de ejecución ns:',(sum(TiempoEjecuciones))/len(TiempoEjecuciones))
+    print('Tiempo medio de ejecución ns: ',(sum(TiempoEjecuciones))/len(TiempoEjecuciones))
     mean = sum(TiempoEjecuciones) / len(TiempoEjecuciones)
     var = sum((l-mean)**2 for l in TiempoEjecuciones) / len(TiempoEjecuciones)
     st_dev = math.sqrt(var)
-    print('Desviación estandar ns', str(st_dev))
-    print('Max tiempo de ejecución ns', max(TiempoEjecuciones))
+    print('Desviación estandar ns: ', str(st_dev))
+    print('Max tiempo de ejecución ns: ', max(TiempoEjecuciones))
     
 main()
