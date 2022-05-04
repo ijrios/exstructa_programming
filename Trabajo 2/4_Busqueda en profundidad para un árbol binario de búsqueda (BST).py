@@ -58,6 +58,7 @@ for i in range(1000):
     arbol = insertar(arbol,random.randint(1, 1000))
 print('Tiempo generando la lista ms',str((time.time_ns()-inicial)/1000000))
 
+
 NumerosBuscar = []
 NumeroDeIteraciones = []
 
@@ -66,6 +67,7 @@ for i in range(500):
     inicial = time.time_ns()
     contador = 0
     Num = random.randint(1, 1000)
+    Num2 = []
     NumerosBuscar.append(Num)
     NumeroDeIteraciones.append(buscar(arbol,Num,contador))
     final = time.time_ns()

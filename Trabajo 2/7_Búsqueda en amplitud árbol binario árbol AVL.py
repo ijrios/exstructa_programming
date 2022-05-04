@@ -154,6 +154,7 @@ def main():
     for i in range(1000):
         root = myTree.insert(root, random.randint(1, 10000))
     print('Tiempo generando la lista ms',str((time.time_ns()-inicial)/1000000))
+     
     
     NumerosBuscar = []
     NumeroDeIteraciones = []
@@ -165,6 +166,8 @@ def main():
         NumeroDeIteraciones.append(myTree.bfs(root,Num))
         final = time.time_ns()
         TiempoEjecuciones.append(final-inicial)
+        print(NumeroDeIteraciones)
+
 
     plot.hist(NumeroDeIteraciones)
     plot.title("Numero de Iteraciones")
