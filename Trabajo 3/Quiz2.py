@@ -23,7 +23,7 @@ class ProcessPrimes(threading.Thread):
     
     def run(self):
         sema.acquire()
-        print("Start")
+        print("Inicio del hilo")
         with open(self.file, "r") as file:
             for line in file:
                 currentline = line.split(",")
@@ -42,18 +42,20 @@ class ProcessPrimes(threading.Thread):
                     self.count_primes += 1
                     self.primes.append(num)
                     
-            print(self.name,"---->",self.count_primes, "primes") 
+            print(self.name,"---->",self.count_primes, "primos") 
             print(self.primes)
             #Write final file
-            writeFile("finalFile.txt", self.primes)   
+            writeFile("finalFile.txt", self.primes,self.name)   
             sema.release()
             
     def getprime(self):
         return self.primes
     
 
-def writeFile(file,string):
+def writeFile(file,string,name):
     archivo = open(file,'a')
+    archivo.write("Primos encontrados "+name)
+    archivo.write("\n")
     archivo.write(str(string))
     archivo.write("\n")
     archivo.close()
