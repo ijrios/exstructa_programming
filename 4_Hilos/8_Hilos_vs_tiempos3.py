@@ -5,12 +5,16 @@ Created on Mon May  2 10:42:42 2022
 @author: s205e19
 """
 
+# Corregir errores en los tiempos e implementar archivos planos para imprimir
+# todos los primos encontrados en cada proceso.
+
 import threading
 import time
 import random
 import os
 
 class ProcessPrimes(threading.Thread):
+    
     def __init__(self, name, listN):
         threading.Thread.__init__(self)
         self.name = name
@@ -19,6 +23,7 @@ class ProcessPrimes(threading.Thread):
         self.primes = []
 
     def run(self):
+        archivo = open("data.txt", 'w')
         itime = time.time()
         for num in self.listN:
             c_div = 0
@@ -30,12 +35,17 @@ class ProcessPrimes(threading.Thread):
                 #is prime number 
                 self.count_primes += 1
                 self.primes.append(num)
+                archivo.write(str("\n Cantidad de primos - "))
+                archivo.write(str(self.count_primes))
+                archivo.write(str("\n Primos encontrados - "))
+                archivo.write(str(self.primes))
+                
 
         ftime = time.time()
         ttp = (ftime-itime)        
         print(self.name,"---->",self.count_primes, "primes in",ttp,"seconds") 
         print(self.primes)
-        self.archivo()
+        archivo.close()
 
 
     def assign_nums(self,lisN):
@@ -90,9 +100,6 @@ def main():
 
         for prc in process:
             prc.join()
-
-       
-    
         
         ftime = time.time()
         ttp = (ftime-itime)
