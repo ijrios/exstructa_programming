@@ -24,10 +24,10 @@ class ProcessPrimes(threading.Thread):
     def run(self):
         sema.acquire()
         print("Start")
-        with open(self.file, "r") as filestream:
-            for line in filestream:
+        with open(self.file, "r") as file:
+            for line in file:
                 currentline = line.split(",")
-                line = currentline.pop()
+                currentline.pop()
                 int_list = list(map(int, currentline))
                #print(int_list)
           
