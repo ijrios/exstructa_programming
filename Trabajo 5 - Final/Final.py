@@ -2,9 +2,8 @@
 """
 Created on Mon Jun  6 10:15:11 2022
 
-@author: s216e10
+@author: jario
 """
-
 import os
 
 class Nodo:
