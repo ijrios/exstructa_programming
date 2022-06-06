@@ -8,7 +8,7 @@ Created on Tue May 31 16:51:59 2022
 # Generador de archivos
 import random
 random.seed(12345)
-max_num = 10
+max_num = 10000000
 number_files = 10
 
 

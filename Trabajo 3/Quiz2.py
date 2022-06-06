@@ -22,7 +22,7 @@ class ProcessPrimes(threading.Thread):
         
     
     def run(self):
-        sema.acquire()
+        
         print("Inicio del hilo")
         with open(self.file, "r") as file:
             for line in file:
@@ -44,6 +44,7 @@ class ProcessPrimes(threading.Thread):
                     
             print(self.name,"---->",self.count_primes, "primos") 
             print(self.primes)
+            sema.acquire()
             #Write final file
             writeFile("finalFile.txt", self.primes,self.name)   
             sema.release()
