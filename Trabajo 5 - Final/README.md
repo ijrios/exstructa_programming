@@ -15,5 +15,5 @@ Implementar un programa con un menú de usuario para las siguientes funcionalida
 • Generar archivo: Genera un archivo de longitudes fijas para un sistema de información geográfica, el archivo tiene las siguientes características, para esto crear una opción de tal forma que todos los datos almacenados en la cola vayan al archivo.
 
 <p align="center">
-  <img src="tabla.png" width="350" title="hover text">
+  <img src="tabla.PNG" width="350" title="hover text">
 </p>
